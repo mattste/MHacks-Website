@@ -119,6 +119,21 @@ class Event(Any):
     def __unicode__(self):
         return self.name
 
+class ScanEvent(Any, PermissionsMixin):
+    name = models.CharField(max_length=60)
+    info = models.TextField(default='')
+    can_only_scan_once = models.BooleanField(default=True)
+    num_allowable_scans = models.IntegerField()
+
+    # a ScanEvent can have many users, and a MHacksUser might have many ScanEvents
+    # associated with him/her
+    users = models.ManyToManyField(MHacksUser)
+
+    # a ScanEvent should be associated with an Event. Once an event ends, a
+    # ScanEvent associated with that Event should be invalid
+    # Of course, this is only my assumption so please feel free to change this.
+    backing_event = models.OneToOneField(Event, on_delete=models.CASCADE)
+
 
 class Announcement(Any):
     title = models.CharField(max_length=60)
