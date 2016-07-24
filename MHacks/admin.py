@@ -26,3 +26,8 @@ class AnnouncementAdmin(admin.ModelAdmin):
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(ScanEvent)
+class ScanEventAdmin(admin.ModelAdmin):
+    pass
+

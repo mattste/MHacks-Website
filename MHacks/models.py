@@ -119,15 +119,20 @@ class Event(Any):
     def __unicode__(self):
         return self.name
 
-class ScanEvent(Any, PermissionsMixin):
+class ScanEvent(Any):
+    """Defines the model for a ScanEvent, the model for a QR code event.
+    """
     name = models.CharField(max_length=60)
     info = models.TextField(default='')
-    can_only_scan_once = models.BooleanField(default=True)
+    # can only have one scan per user
+    can_scan_only_once_per_user = models.BooleanField(default=True)
+    # should this be a hard limit on the number of scans this event can handle
+    # or the number of scans per user?
     num_allowable_scans = models.IntegerField()
 
-    # a ScanEvent can have many users, and a MHacksUser might have many ScanEvents
-    # associated with him/her
-    users = models.ManyToManyField(MHacksUser)
+    # a ScanEvent can have many users that scan a QR code for that ScanEvent, 
+    # and a MHacksUser might scan QR codes for different events.
+    users = models.ManyToManyField(MHacksUser, related_name="scan_event_users")
 
     # a ScanEvent should be associated with an Event. Once an event ends, a
     # ScanEvent associated with that Event should be invalid
