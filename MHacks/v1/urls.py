@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from rest_framework_docs.views import DRFDocsView
 from announcements import Announcements, Announcement
 from locations import Locations, Location
@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^events$', Events.as_view()),
     url(r'^countdown$', get_countdown),
     url(r'^map$', get_map),
+    url(r'^explorer/', include('explorer.urls')),
     url(r'^docs/$', DRFDocsView.as_view(template_name='docs.html'), name='docs'),
 ]
