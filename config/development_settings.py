@@ -7,6 +7,8 @@ SECRET_KEY = '$xo%i8vi+d624)&5)msxs3)s5tunm3dj9#n+fqn*zl%am%==!%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = []
+
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -39,7 +41,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Remove this 
 EMAIL_HOST = 'localhost'
 
 MANDRILL_API_KEY = 'THIS IS A DUMMY API KEY'
-MAILCHIMP_API_KEY = ''  # Use API KEY for MAILCHIMP on production
+MAILCHIMP_API_KEY = 'THIS IS A DUMMY MAILCHIMP KEY'  # Use API KEY for MAILCHIMP on production
 MAILCHIMP_INTEREST_LIST = 'https://us6.api.mailchimp.com/3.0/lists'  # Fill with actual list URL on production
 # ^ This is for the blackout interest link
 
